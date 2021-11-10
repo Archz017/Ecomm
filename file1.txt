@@ -1,0 +1,25 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch Arch
+# Changes to be committed:
+#	new file:   ecom/__init__.py
+#	new file:   ecom/__pycache__/__init__.cpython-38.pyc
+#	new file:   ecom/__pycache__/settings.cpython-38.pyc
+#	new file:   ecom/__pycache__/urls.cpython-38.pyc
+#	new file:   ecom/__pycache__/wsgi.cpython-38.pyc
+#	new file:   ecom/asgi.py
+#	new file:   ecom/settings.py
+#	new file:   ecom/urls.py
+#	new file:   ecom/wsgi.py
+#
+# Untracked files:
+#	db.sqlite3
+#	manage.py
+#	static/
+#	store/
+#Initail Commit
+
+
+
