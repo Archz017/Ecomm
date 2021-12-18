@@ -1,0 +1,37 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    <div class="box-element" id="form-wrapper">
+        <form id="form" action="/process_products" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div id="user-info">
+                <div class="form-field">
+                    <input required class="form-control" type="text" name="name" placeholder="Name ">
+                </div>
+                <div class="form-field">
+                    <input required class="form-control" type="number" name="price" placeholder="Price">
+                </div>
+                <div class="form-field">
+                    <input required class="form-control" type="text" name="description" placeholder="Description">
+                </div>
+                <div class="form-field">
+                    <input required class="form-control" type="text" name="category" placeholder="Category">
+                </div>
+                <!-- <div class="form-field">
+                    <weak>Digital</weak>
+                    <input type="checkbox" name="digital" placeholder="Digital">
+                </div> -->
+                <div>
+                    <input required class="form-control" type="file" name="image" accept="image/*">
+                </div>
+                <div>
+                    <button id="form-button" class="btn btn-success" type="submit" value="Upload">Upload</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

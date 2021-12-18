@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Ecomm</title>
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/main.css' %}">
+    <!-- <script src='main.js'></script> -->
+
+    <script type="text/javascript" >
+      var user = '{{request.user}}'
+
+      function getToken(name){
+        var cookieValue = null;
+        if(document.cookie && document.cookie != ''){
+          var cookies = document.cookie.split(';')
+          for(var i = 0; i < cookies.length; i++){
+            var cookie = cookies[i].trim();
+            if(cookie.substring(0, name.length + 1) === (name + '=')){
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+      var csrftoken = getToken('csrftoken')
+
+    </script>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'store' %}">Ecomm</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'store' %}">Store <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'seller' %}">Seller/Admin <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'add_products' %}">Add Products <span class="sr-only"></span></a>
+            </li>
+            <form method='POST' type="get" action="{% url 'searched' %}">
+              {% csrf_token %}
+              <input  id="search_box" class="form-control" type="text" name="search_box"  placeholder="Search..." >
+              <button id="search_submit" class="btn btn-outline-secondary" type="submit" >Search</button>
+            </form>
+          </ul>
+          <div class="form-inline my-2 my-lg-0">
+            <form id="form" action="logout_request" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+                <button type="submit"  class="btn btn-warning" value="Logout">Logout</button>
+                <a href="{% url 'cart' %}">
+                  <img  id="cart-icon" src="{% static 'images/cart.png' %}">
+                </a>
+              </form>
+              
+               <!-- <p id="cart-total">0</p> -->
+           
+            </div>
+        </div>
+      </nav>
+
+    <div>
+        {% block content %}
+        <script type="text/javascript">
+          if(user_id == 'admin'){
+            console.log("Hello Admin")
+            document.getElementById('admin-only').classList.remove('hidden')
+          }
+        </script>
+        {% endblock content %}
+    </div>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+  
+</body>
+</html>

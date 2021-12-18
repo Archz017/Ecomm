@@ -1,0 +1,28 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    {% for record in records %}
+    <div class="col-lg-4">
+        <img class="thumbnail" src="{{record.imageURL}}">
+        <div class="box-element product">
+            {% csrf_token %}
+            <h6><strong>{{record.name}}</strong></h6>
+            <hr>
+            <h6><weak>{{record.category}}</weak></h6>
+            <h6>{{record.description}}</h6>
+            <button data-product={{record.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+            <a class="btn btn-outline-success" href="#">View</a>
+            <h4 style="display: inline-block; float: right">
+            ${{record.price|floatformat:2}}</h4>
+
+        </div>
+    </div>
+    {% endfor%}
+
+</div>
+
+
+
+{% endblock content %}
